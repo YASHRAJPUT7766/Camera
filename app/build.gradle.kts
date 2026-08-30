@@ -6,7 +6,12 @@ plugins {
 
 android {
     namespace = "com.testlab.camerasec"
-    compileSdk = 33
+    // compileSdk must be 34+ because the Firebase Firestore / Compose UI
+    // libraries this project depends on require compiling against API 34.
+    // This does NOT change what Android version the app targets or runs on
+    // — targetSdk/minSdk below still say Android 13 (API 33) and above.
+    // compileSdk only controls which SDK APIs are available at compile time.
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "com.testlab.camerasec"
