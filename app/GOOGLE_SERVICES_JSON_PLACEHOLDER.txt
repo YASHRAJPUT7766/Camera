@@ -1,23 +1,69 @@
-google-services.json GOES HERE
-================================
-
-This folder (app/) needs a real `google-services.json` file from YOUR Firebase
-project before the app will build and run with Firebase features working.
-
-Steps:
-1. Go to https://console.firebase.google.com and create a new project (or use
-   an existing one).
-2. Inside the project, click "Add app" → Android.
-3. Enter this EXACT package name: com.testlab.camerasec
-4. Download the `google-services.json` file it gives you.
-5. Place it directly in the `app/` folder (same folder as `build.gradle.kts`),
-   REPLACING this placeholder file — the real filename must be exactly
-   `google-services.json`.
-6. Delete this placeholder text file (GOOGLE_SERVICES_JSON_PLACEHOLDER.txt).
-
-Without a real google-services.json in place, the Gradle build will fail at
-the google-services plugin step with an error like:
-  "File google-services.json is missing from module root folder."
-
-See the main README.md → "Firebase Setup" section for the full walkthrough,
-including which Firestore/Storage rules and services to enable.
+{
+  "project_info": {
+    "project_number": "333775666671",
+    "firebase_url": "https://yash-software-default-rtdb.firebaseio.com",
+    "project_id": "yash-software",
+    "storage_bucket": "yash-software.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:333775666671:android:c7180216c20031c2d78a1a",
+        "android_client_info": {
+          "package_name": "com.testlab.camerasec"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "333775666671-6ij7udkjvema4v6c0f9dclvmqb5766ue.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCD-SgYeysbuXaFrDiIR5pewqzdIndHst0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "333775666671-6ij7udkjvema4v6c0f9dclvmqb5766ue.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:333775666671:android:31605f616b78fea7d78a1a",
+        "android_client_info": {
+          "package_name": "com.yashsoftware.quiztech"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "333775666671-6ij7udkjvema4v6c0f9dclvmqb5766ue.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCD-SgYeysbuXaFrDiIR5pewqzdIndHst0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "333775666671-6ij7udkjvema4v6c0f9dclvmqb5766ue.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
