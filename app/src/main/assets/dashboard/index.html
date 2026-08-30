@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Camera Security Lab — Local Test Dashboard</title>
+<link rel="stylesheet" href="/dashboard.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <span class="dot" id="connDot"></span>
+      <h1>Camera Security Lab</h1>
+    </div>
+    <span class="badge" id="connStatus">Connecting…</span>
+  </header>
+
+  <main>
+    <div class="warning-banner">
+      ⚠️ This dashboard controls only <strong>your own authorized test device</strong> on this local
+      network. It has no connection to any other phone, no internet relay, and no way to reach a
+      device outside this Wi-Fi network. Use it only against hardware you own or are explicitly
+      authorized to test.
+    </div>
+
+    <section class="video-panel">
+      <div class="video-frame">
+        <img id="streamImg" alt="Live test stream" />
+        <div id="noStream" class="no-stream">No active stream. Press Start on the device or wait for it to begin.</div>
+        <div id="streamingActiveBadge" class="active-badge hidden">STREAMING ACTIVE</div>
+      </div>
+    </section>
+
+    <section class="status-grid">
+      <div class="status-card">
+        <span class="label">Connection</span>
+        <span class="value" id="statConnection">—</span>
+      </div>
+      <div class="status-card">
+        <span class="label">Camera</span>
+        <span class="value" id="statCamera">—</span>
+      </div>
+      <div class="status-card">
+        <span class="label">Streaming</span>
+        <span class="value" id="statStreaming">—</span>
+      </div>
+      <div class="status-card">
+        <span class="label">Device address</span>
+        <span class="value" id="statAddress">—</span>
+      </div>
+    </section>
+
+    <section class="controls">
+      <p class="controls-note">
+        Camera on/off and front/back switching are performed on the device itself (Preview tab),
+        which keeps camera control physically tied to the device owner rather than a remote browser.
+        This dashboard reflects device state and lets you refresh the connection below.
+      </p>
+      <button id="refreshBtn" class="btn">Refresh Status</button>
+    </section>
+
+    <section class="capture-panel">
+      <h2>Remote Capture Test (Network Data Transfer)</h2>
+      <p class="controls-note">
+        These buttons send a real HTTP request to the device and measure the actual network
+        round trip — request sent, device captures, response comes back with the file. This only
+        works if <strong>Allow Remote Capture</strong> is turned ON on the device itself (Streaming
+        tab). If it's off, you'll see a clear "blocked" result below, not a fake success.
+      </p>
+      <div id="remoteCaptureGate" class="gate-badge">Checking device setting…</div>
+      <div class="capture-buttons">
+        <button id="capturePhotoBtn" class="btn" disabled>📷 Capture Photo (Network Test)</button>
+        <button id="captureVideoBtn" class="btn btn-secondary" disabled>🎥 Capture 5s Video (Network Test)</button>
+      </div>
+
+      <div id="captureResult" class="capture-result hidden">
+        <div class="capture-preview">
+          <img id="capturedPhoto" class="hidden" alt="Captured photo" />
+          <video id="capturedVideo" class="hidden" controls></video>
+        </div>
+        <div class="capture-stats">
+          <div class="stat-row"><span>Request sent at</span><span id="statReqTime">—</span></div>
+          <div class="stat-row"><span>Round-trip time</span><span id="statRtt">—</span></div>
+          <div class="stat-row"><span>Data received</span><span id="statBytes">—</span></div>
+          <div class="stat-row"><span>Transfer rate</span><span id="statRate">—</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="log-panel">
+      <h2>Dashboard Connection Log</h2>
+      <ul id="clientLog"></ul>
+    </section>
+  </main>
+
+  <footer>
+    Local network only · No cloud · No third-party tracking · Served directly by the device
+  </footer>
+
+<script src="/dashboard.js"></script>
+</body>
+</html>

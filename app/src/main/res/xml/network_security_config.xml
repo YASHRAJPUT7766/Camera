@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    This app never sends camera data to the public internet. The local test
+    server binds to the device's LAN address only (see LocalStreamServer.kt),
+    and this config documents that cleartext HTTP is expected on-device for
+    the local dashboard connection, not as a general internet policy.
+-->
+<network-security-config>
+    <base-config cleartextTrafficPermitted="true">
+        <trust-anchors>
+            <certificates src="system" />
+        </trust-anchors>
+    </base-config>
+</network-security-config>

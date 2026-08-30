@@ -1,0 +1,7 @@
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="status_active_red">#FFD32F2F</color>
+    <color name="status_ok_green">#FF2E7D32</color>
+    <color name="status_warn_amber">#FFF9A825</color>
+</resources>

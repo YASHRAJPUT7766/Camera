@@ -1,0 +1,14 @@
+// Camera Security Lab — Firebase Storage is NOT used by this project.
+//
+// Firebase Storage requires the paid "Blaze" plan even for small personal
+// projects, so captured photos/videos/live-frames are uploaded to
+// Cloudinary instead (an UNSIGNED upload preset — see
+// app/src/main/java/com/testlab/camerasec/cloudinary/CloudinaryUploader.kt).
+// Cloudinary's own upload preset settings act as its access control, not
+// these rules.
+//
+// This file is kept only so the repo's history/structure makes it obvious
+// Storage was deliberately skipped, not forgotten. There is nothing to
+// deploy here — do not paste this into the Firebase Console's Storage
+// Rules tab; leave your existing Storage rules (for your other apps)
+// untouched.

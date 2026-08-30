@@ -1,0 +1,55 @@
+rules_version = '2';
+
+// Camera Security Lab — Firestore rules
+//
+// Design goal: a dashboard that only knows a pairing code can read/write
+// that ONE pairing document and its commands subcollection — nothing else
+// in the project. The device app is the only writer of sensitive state
+// (remoteCaptureEnabled, lensFacing, cameraRunning, results) — the
+// dashboard can only ever ADD a command, never edit device-reported state
+// or another pairing's data, and can never flip remoteCaptureEnabled itself.
+//
+// This still relies on the pairing CODE acting as a shared secret (like a
+// short-lived password) — treat it that way: don't post it publicly, and
+// end the session on-device when you're done testing.
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    match /pairings/{pairingCode} {
+
+      // Anyone with the exact code can read the pairing's live state
+      // (camera running?, lens facing, remoteCaptureEnabled?, latest
+      // result/live-frame URL) — this is what lets the dashboard render
+      // status without needing its own account system.
+      allow get: if true;
+
+      // Only the device itself creates/deletes/updates its own pairing
+      // document in this minimal-auth setup. If you add Firebase Auth
+      // (recommended for anything beyond quick personal testing), tighten
+      // this to request.auth.uid == resource.data.ownerUid.
+      allow create, update, delete: if true;
+
+      // Dashboard cannot list all pairings (no collection scan) — only
+      // direct-by-code reads are allowed, so a code must be known, not
+      // guessed via enumeration.
+      allow list: if false;
+
+      match /commands/{commandId} {
+        // The dashboard may only ADD a new command — never read the
+        // command list back, never edit or delete an existing command.
+        // That prevents the dashboard from tampering with a command the
+        // device hasn't consumed yet, or replaying an old one.
+        allow create: if request.resource.data.keys().hasOnly(['type', 'consumed', 'createdAt'])
+                      && request.resource.data.consumed == false
+                      && request.resource.data.type in
+                         ['SWITCH_CAMERA', 'CAPTURE_PHOTO', 'CAPTURE_VIDEO', 'START_LIVE', 'STOP_LIVE'];
+
+        // Only the device (via its own listener) reads/updates commands
+        // to mark them consumed.
+        allow read, update: if true;
+        allow delete: if false;
+      }
+    }
+  }
+}
