@@ -84,6 +84,11 @@ dependencies {
     implementation("androidx.camera:camera-view:$cameraxVersion")
     implementation("androidx.camera:camera-video:$cameraxVersion")
 
+    // Guava's ListenableFuture — CameraX's ProcessCameraProvider.getInstance()
+    // returns this type; without it on the compile classpath explicitly,
+    // Kotlin can't resolve ListenableFuture.addListener(...).
+    implementation("com.google.guava:guava:33.3.1-android")
+
     // Accompanist permissions (thin wrapper over the *standard* runtime permission APIs)
     implementation("com.google.accompanist:accompanist-permissions:0.34.0")
 
